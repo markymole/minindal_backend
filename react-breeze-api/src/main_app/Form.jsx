@@ -76,6 +76,10 @@ const Form = () =>
     <div className=''>
         <form onSubmit={storePending} onKeyDown={(e) => checkKeyDown(e)} encType="multipart/form-data">
         <div className="w-full md:w-1/2 lg:w-1/3 mx-auto mt-6 px-4 h-fit">
+            {errors.business_name || errors.description || errors.type || errors.specialties || errors.category || errors.phone_number_one || errors.imagedata
+            || errors.price_range || errors.operating_from || errors.operating_to || errors.open_from || errors.open_to || errors.service_options
+            || errors.address || errors.latitude || errors.longitude || errors.town || errors.email
+            ?  <div className='flex fixed bottom-5 w-4/5 left-1/2 transform -translate-x-1/2 mx-auto bg-red-100/80 border-red-400 text-red-500 rounded-md shadow-sm shadow-gray-400 border py-1 px-4 '><span className="text-red-400 text-sm">Please check previous page for errors</span></div> : <div></div>}
             {
                 currentPage == "first" &&   
                 <FadeInOut show={currentPage == "first"} duration={500}>

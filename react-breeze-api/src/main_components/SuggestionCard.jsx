@@ -34,7 +34,7 @@ function SuggestionCard({record, reviews}){
 
     return(<>
             <div className="card">
-                    <div className="w-60 h-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <div className="w-60 lg:60 h-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <Link to={`/search/${record.business_name}/${record.id}`} key={record.id}>
                             {/* <img className="rounded-t-lg w-full h-44 object-cover" src="src/assets/.png" alt="" /> */}
                             {
@@ -46,7 +46,7 @@ function SuggestionCard({record, reviews}){
                         </Link>
                         <div className="p-4">
                             <Link to={`/search/${record.business_name}/${record.id}`} key={record.id}>
-                                <h5 className="mb-2 text-base lg:text-lg font-bold tracking-tight text-gray-800 dark:text-white">{record.business_name}</h5>
+                                <h5 className="mb-1 text-base lg:text-lg font-bold tracking-tight text-gray-800 dark:text-white">{record.business_name}</h5>
                             </Link>
                             <div className="flex items-center">
                                 {[...Array(5)].map((x, i) =>
@@ -71,7 +71,7 @@ function SuggestionCard({record, reviews}){
                                     <p className='text-gray-500'>•</p>
                                     <p className='text-sm md:text-sm lg:text-base text-gray-500'>{record.category}</p>
                             </div> */}
-                            <div className='flex gap-1 py-2'>
+                            <div className='flex gap-1 py-1'>
                                   <p className='text-[13px] md:text-sm sm:text-xs lg:text-sm text-gray-500'>
                                   <span className='font-medium text-gray-600'>{record.town}</span> - {record.address}</p>
                             </div>

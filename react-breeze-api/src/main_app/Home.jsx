@@ -433,7 +433,7 @@ const Home = () => {
             :
             <FadeInOut show={!toggled} duration={200}>
             <div id='map' className='w-full h-[80vh] fixed right-0'>
-                {/* <Map records={isFiltered ? filteredPost : records}/> */}
+                <Map records={isFiltered ? filteredPost : records}/>
             </div>
             </FadeInOut>
           }
@@ -444,7 +444,7 @@ const Home = () => {
               <Posts records={isFiltered ? filteredPost : records} loading={loading}/>
             </div>
             <div id='map' className='w-2/4 h-[83vh] fixed right-0'>
-                {/* <Map records={isFiltered ? filteredPost : records}/> */}
+                <Map records={isFiltered ? filteredPost : records}/>
             </div>
         </div>
      

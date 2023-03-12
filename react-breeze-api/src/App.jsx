@@ -66,8 +66,8 @@ export function App() {
                 <Route index element={<Home />} />
                 <Route path="/search/:business_name/:id" element={<ViewPage />}></Route>
                 <Route path="/writeareview/:business_name/:id" element={<ReviewPage />}></Route>
-                <Route path="suggestion-page" element={<SuggestionPage />}></Route>
-                <Route path="application-request" element={<Form />}></Route>
+                <Route path="discover-hidden-treasures" element={<SuggestionPage />}></Route>
+                <Route path="about-us" element={<Form />}></Route>
                 <Route path="contact-us" element={<ContactPage />}></Route>
                 <Route path="success" element={<Sucess />}></Route>
             </Route>

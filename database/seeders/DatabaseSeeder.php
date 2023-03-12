@@ -15,11 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create()
-        // \App\Models\Records::factory(38)->create();
-
-        // \App\Models\Archives::factory(24)->create();
-        // \App\Models\Pendings::factory(12)->create();
 
         \App\Models\Towns::factory()->create([
             'town' => 'Angeles',
@@ -54,25 +49,10 @@ class DatabaseSeeder extends Seeder
         
 
         \App\Models\User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Center for Kapampangan Studies',
+            'email' => 'ckskapampangancuisine@gmail.com',
             'role' => 'Super Admin',
             'town' => 'CKS'
-        ]);
-
-        \App\Models\User::factory()->create([
-            'name' => 'Mark',
-            'email' => 'mark@example.com',
-            'role' => 'Developer',
-            'town' => 'HAU'
-        ]);
-
-        \App\Models\User::factory()->create([
-            'name' => 'blocked',
-            'email' => 'blocked@example.com',
-            'role' => 'Developer',
-            'town' => 'HAU',
-            'status' => 1
         ]);
 
         \App\Models\User::factory()->create([

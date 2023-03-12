@@ -6,8 +6,8 @@ import FadeInOut from "../../animation/fade";
 import { Posts } from '../../components/Posts';
 import { Pagination } from '../../components/Pagination';
 import TopHeading from '../../components/TopHeading';
-
-
+import { CSVLink, CSVDownload } from "react-csv";
+ 
 const Records = () => {
     const dropdownRef1 = useRef();
     const dropdownRef2 = useRef();
@@ -359,10 +359,17 @@ const Records = () => {
 
             </div>
           </div>
+           
           <div className="inline-block min-w-full py-2 align-middle mt-2">
                 <Posts records={isFiltered ? currentFilteredPosts : currentPosts} loading={loading} status={status}/>
                 <Pagination postsPerPage={postsPerPage} totalPosts={isFiltered? filteredResults.length : records.length} paginate={paginate} currentP={currentPage} loading={loading} indexOfFirstPost={indexOfFirstPost} indexOfLastPost={indexOfLastPost}/>
           </div>   
+            <CSVLink data={records}
+                filename={"minindal-records.csv"}
+                className="h-fit text-white bg-green-500 hover:bg-green-400 font-medium rounded-md text-sm px-5 py-2.5 text-center mr-2 active:scale-95 transition-all ease-out duration-300"
+                target="_blank">
+                Download Records    
+            </CSVLink>
           <div id='deleteModal' className="hidden absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50 modal w-1/4 ">
                     <div className="bg-white rounded-lg h-fit shadow">
                         <div className="flex justify-end p-2">

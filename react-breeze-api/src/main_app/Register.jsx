@@ -9,7 +9,7 @@ const Register = () => {
     const [name, setName] = useState("");
     const [password_confirmation, setPassword_Confirmation] = useState("");
     const role = "User";
-    const town = "User";
+    const town = "N/A";
     const { register, errors, loginerror, spinner } = useAuthContext();
 
     const handleLogin = async (event) => {

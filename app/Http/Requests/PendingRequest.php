@@ -47,7 +47,7 @@ class PendingRequest extends FormRequest
             'longitude' => ['required', 'numeric'],
             'cover_image' => ['nullable'],
             'image_name' => ['nullable'],
-            'imagedata' => ['nullable', 'image', 'mimes:jpeg,jpg,png,svg,gif', 'size:3000'],
+            'imagedata' => ['nullable', 'image', 'mimes:jpeg,jpg,png,svg,gif'],
             'date_applied' => ['nullable', 'date']
         ];
     }
