@@ -64,7 +64,7 @@ const RejectPage = () => {
                     </div>
                     :
                 <div className='mt-10 relative z-2'>
-                    <img src={"http://localhost:8000/" + formValues['cover_image']} alt={formValues['cover_image']} className="rounded-t-lg h-80 w-full object-cover"/>
+                    <img src={`${import.meta.env.VITE_API_BASE_URL}` + formValues['cover_image']}  alt={formValues['cover_image']} className="rounded-t-lg h-80 w-full object-cover"/>
                     <h5 className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-2 text-white text-3xl font-medium'>{formValues['business_name']}</h5>
                 </div>
                 }
@@ -85,10 +85,11 @@ const RejectPage = () => {
                   <div className='w-1/2'>
                       <label className="text-sm font-medium text-gray-900 block mb-2">Category</label>
                       <select id="category" name="category" type="text" value={formValues["category"]} onChange={onChange} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-                            <option defaultValue>Select Category</option>
-                            <option value="Exotic">Exotic</option>
-                            <option value="Delicacy">Delicacy</option>
-                            <option value="Sweets">Sweets</option>
+                                <option defaultValue>Select Category</option>
+                                <option value="Traditional">Traditional</option>
+                                <option value="Pastries">Pastries</option>
+                                <option value="Desserts">Desserts</option>
+                                <option value="Exotic">Exotic</option>
                         </select>                      
                         {errors?.category && (<div className='flex'><span className="text-red-400 text-sm m-2 p-2 mt-3">{errors?.category[0]}</span></div>)}
                   </div>

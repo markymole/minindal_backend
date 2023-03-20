@@ -99,7 +99,7 @@ const UserLists = () => {
         <div className="w-4/5 mx-auto mt-12 h-fit">
             <div className='flex justify-between'>
                 <h5 className='text-2xl font-semibold'>Guest Users Records</h5>
-                <Link to='/dashboard/admin-records/create' className="h-fit text-white bg-green-500 hover:bg-green-400 font-medium rounded-md text-sm px-5 py-2.5 text-center mr-2 active:scale-95 transition-all ease-out duration-300" type="button" data-dropdown-toggle="dropdown" >New Admin</Link>
+                {/* <Link to='/dashboard/admin-records/create' className="h-fit text-white bg-green-500 hover:bg-green-400 font-medium rounded-md text-sm px-5 py-2.5 text-center mr-2 active:scale-95 transition-all ease-out duration-300" type="button" data-dropdown-toggle="dropdown" >New Admin</Link> */}
             </div>
            
             <div className='mt-5'>

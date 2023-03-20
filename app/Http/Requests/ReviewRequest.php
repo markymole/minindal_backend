@@ -28,7 +28,10 @@ class ReviewRequest extends FormRequest
             'business_name' => ['required', 'string'],
             'comments' => ['nullable', 'string'],
             'star_rating' => ['required', 'numeric'],
-            'author' => ['nullable', 'string']
+            'author' => ['nullable', 'string'],
+            'review_image' => ['nullable'],
+            'image_name' => ['nullable'],
+            'imagedata' => ['nullable', 'image', 'mimes:jpeg,jpg,png,svg,gif'],
         ];
     }
 }

@@ -18,14 +18,7 @@ class ActiveUser
     public function handle(Request $request, Closure $next)
     {
         if(auth()->check() && (auth()->user()->status == 1)){
-            Auth::guard('web')->logout();
-
-            $request->session()->invalidate();
-
-            $request->session()->regenerateToken();
-
-            return redirect()->route('login')->withErrors('email', 'Your Account is suspended, please contact Admin.');
-
+            return response()->json(['message' => 'Not authorized, your account has been blocked!'], 420);
         }
 
         return $next($request);

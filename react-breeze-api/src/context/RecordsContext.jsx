@@ -54,6 +54,9 @@ export const RecordsProvider = ({children}) => {
       business_name: "",
       comment: "",
       rating: "",
+      review_image: "",
+      image_name: "",
+      imagedata: "",
       author: ""
     }
 
@@ -430,29 +433,17 @@ export const RecordsProvider = ({children}) => {
       }
     }
 
-    const storeReview = async ({business_name, star_rating, comments, author}) => {
+    const storeReview = async ({business_name, imagedata, star_rating, comments, author}) => {
       setSpinner(true);
       setErrors([]);
       setReviewResult(null)
-      // let category = formValues['category']; let description = formValues['description']; let type = formValues['type'];
-      // let price_range = formValues['price_range']; let operating_from = formValues['operating_from']; let operating_to = formValues['operating_to'];
-      // let open_from = formValues['open_from']; let open_to = formValues['open_to']; let service_options = formValues['service_options'];
-      // let specialties = formValues['specialties']; let phone_number_one = formValues['phone_number_one']; let phone_number_two = formValues['phone_number_two'];
-      // let email = formValues['email'];let socials = formValues['socials'];let cover_image = formValues['cover_image'];let image_name = formValues['image_name'];
-      // let town = formValues['town'];let address = formValues['address'];let latitude = formValues['latitude'];let longitude = formValues['longitude'];
-      // let date_applied = formValues['date_applied'];let date_approved = formValues['date_approved'];let date_archived = formValues['date_archived'];
-      // let prev = Number(formValues['rating']);
-      // let computed = (prev + star_rating) / 2;
-      // let rating = 0;
-      // if(prev == 0) {
-      //   rating = star_rating;
-      // }
-      // else{
-      //   rating = computed;
-      // }
+      const config = {     
+        headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+      }
       try {
-        const response = await axios.post("api/data/reviews/", {business_name, star_rating, comments, author});
-        // const response2 = await axios.put("api/data/records/" + record.id, {business_name, description, type, category, specialties, price_range, operating_from, operating_to, open_from, open_to, rating, service_options, phone_number_one, phone_number_two, email, socials, cover_image, image_name, town, address, latitude, longitude, date_applied, date_approved});
+        const response = await axios.post("api/data/reviews", {business_name, imagedata, star_rating, comments, author}, config);
         await getReviews();
         navigate(-1);
         setReviewResult(response.status);

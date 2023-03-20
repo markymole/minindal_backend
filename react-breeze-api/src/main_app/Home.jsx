@@ -4,7 +4,6 @@ import RecordsContext from '../context/RecordsContext';
 import Posts from '../main_components/Posts';
 import Map from '../main_components/Map';
 import FadeInOut from '../animation/fade';
-import image from '../assets/DA-7.png';
 
 const Home = () => {
 
@@ -63,7 +62,7 @@ const Home = () => {
 
   const handleTypeFilter = (value) => {
     if(typeFilter == value){
-      setTypeFilter('')
+      setTypeFilter('');
     }
     else{
       setTypeFilter(value);
@@ -175,6 +174,7 @@ const Home = () => {
   const filterType = (array) => {
     if(typeFilter != ''){
       return array.filter((record) => record.type == typeFilter);
+     
     }
     else{
       return array;
@@ -240,6 +240,22 @@ const Home = () => {
       }
   }, [townSearch, typeFilter, categoryFilter, serviceFilter, submittedSearch]);
 
+  // useEffect(() => {
+  //   const keyDownHandler = event => {
+  //     console.log('User pressed: ', event.key);
+
+  //     if (event.key === 'Enter') {
+  //       submitSearch();
+  //     }
+  //   };
+
+  //   document.addEventListener('keydown', keyDownHandler);
+
+  //   return () => {
+  //     document.removeEventListener('keydown', keyDownHandler);
+  //   };
+  // }, []);
+
 
   const clearSearch = () => {
       setTownSearch('');
@@ -283,32 +299,34 @@ const Home = () => {
                                 {/* <p className='text-sm'>Filter by</p> */}
                                 <p className='text-sm'>Type</p>
                                 <div className='text-sm grid grid-cols-3 md:grid-cols-auto gap-2'>
-                                    <button className={ typeFilter == 'Authentic' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'} onClick={(e) => (handleTypeFilter(e.target.innerText))}>Authentic</button>
-                                    <button className={ typeFilter == 'Modern' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'} onClick={(e) => (handleTypeFilter(e.target.innerText))}>Modern</button>
+                                    <button className={ typeFilter == 'Authentic' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'} onClick={(e) => (handleTypeFilter(e.target.innerText), handleFilter())}>Authentic</button>
+                                    <button className={ typeFilter == 'Modern' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'} onClick={(e) => (handleTypeFilter(e.target.innerText), handleFilter())}>Modern</button>
                                 </div>
                                 <p className='text-sm'>Category</p>
                                 <hr className=''/>
                                 <div className='grid grid-cols-3 md:grid-cols-auto text-sm  gap-2'>
-                                    <button className={ categoryFilter == 'Traditional' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'}  onClick={(e) => (handleCategoryFilter(e.target.innerText))}>Traditional</button>
-                                    <button className={ categoryFilter == 'Pastries' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'} onClick={(e) => (handleCategoryFilter(e.target.innerText))}>Pastries</button>
-                                    <button className={ categoryFilter == 'Deserts' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'} onClick={(e) => (handleCategoryFilter(e.target.innerText))}>Deserts</button>
-                                    <button className={ categoryFilter == 'Exotic' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'} onClick={(e) => (handleCategoryFilter(e.target.innerText))}>Exotic</button>
+                                    <button className={ categoryFilter == 'Traditional' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'}  onClick={(e) => (handleCategoryFilter(e.target.innerText), handleFilter())}>Traditional</button>
+                                    <button className={ categoryFilter == 'Pastries' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'} onClick={(e) => (handleCategoryFilter(e.target.innerText), handleFilter())}>Pastries</button>
+                                    <button className={ categoryFilter == 'Desserts' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'} onClick={(e) => (handleCategoryFilter(e.target.innerText), handleFilter())}>Desserts</button>
+                                    <button className={ categoryFilter == 'Exotic' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'} onClick={(e) => (handleCategoryFilter(e.target.innerText), handleFilter())}>Exotic</button>
                                 </div>
-                                <p className='text-sm'>Price</p>
-                                <hr className=''/>
-                                <div className='grid grid-cols-3 md:grid-cols-auto text-sm gap-2 '>
-                                    <button className={ priceFilter == '100' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'}  onClick={(e) => (handlePriceFilter(e.target.innerText))}>100</button>
-                                    <button className={ priceFilter == '200' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'}  onClick={(e) => (handlePriceFilter(e.target.innerText))}>200</button>
-                                    <button className={ priceFilter == '300' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'}  onClick={(e) => (handlePriceFilter(e.target.innerText))}>300</button>
-                                    <button className={ priceFilter == '500' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'}  onClick={(e) => (handlePriceFilter(e.target.innerText))}>500</button>
-                                    <button className={ priceFilter == '1000' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'}  onClick={(e) => (handlePriceFilter(e.target.innerText))}>1000</button>
+                                <p className='text-sm hidden'>Price</p>
+                                <hr className='hidden'/>
+                                <div className=' grid-cols-3 md:grid-cols-auto text-sm gap-2 hidden'>
+                                    <button className={ priceFilter == '100' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'}  onClick={(e) => (handlePriceFilter(e.target.innerText), handleFilter())}>100</button>
+                                    <button className={ priceFilter == '200' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'}  onClick={(e) => (handlePriceFilter(e.target.innerText), handleFilter())}>200</button>
+                                    <button className={ priceFilter == '300' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'}  onClick={(e) => (handlePriceFilter(e.target.innerText), handleFilter())}>300</button>
+                                    <button className={ priceFilter == '500' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'}  onClick={(e) => (handlePriceFilter(e.target.innerText), handleFilter())}>500</button>
+                                    <button className={ priceFilter == '1000' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'}  onClick={(e) => (handlePriceFilter(e.target.innerText), handleFilter())}>1000</button>
                                 </div>
                                 <p className='text-sm'>Options</p>
                                 <hr className=''/>
                                 <div className='text-sm flex flex-col gap-2'>
-                                    <button className={ serviceFilter == 'Walk In' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'}  onClick={(e) => (handleServiceFilter(e.target.innerText))}>Walk In</button>
-                                    <button className={ serviceFilter == 'Reservation' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'}  onClick={(e) => (handleServiceFilter(e.target.innerText))}>Reservation</button>
-                                    <button className={ serviceFilter == 'Delivery' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'}  onClick={(e) => (handleServiceFilter(e.target.innerText))}>Delivery</button>
+                                    <button className={ serviceFilter == 'Dine-In' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'}  onClick={(e) => (handleServiceFilter(e.target.innerText), handleFilter())}>Dine-In</button>
+                                    <button className={ serviceFilter == 'Take-Out' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'}  onClick={(e) => (handleServiceFilter(e.target.innerText), handleFilter())}>Take-Out</button>
+                                    <button className={ serviceFilter == 'Delivery' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'}  onClick={(e) => (handleServiceFilter(e.target.innerText), handleFilter())}>Delivery</button>
+                                    <button className={ serviceFilter == 'Reservation' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'}  onClick={(e) => (handleServiceFilter(e.target.innerText), handleFilter())}>Reservation</button>
+                                    <button className={ serviceFilter == 'Pasalubong Center' ? 'bg-green-500 px-3 py-1 rounded-md text-white' :'bg-gray-200 px-3 py-1 rounded-md text-gray-900  transition-all ease-out duration-100 active:scale-95'}  onClick={(e) => (handleServiceFilter(e.target.innerText), handleFilter())}>Pasalubong Center</button>
                                 </div>
                             </div>
                             </FadeInOut>
@@ -426,7 +444,7 @@ const Home = () => {
             toggled ? 
             <FadeInOut show={toggled} duration={200}>
             <div id='post-content' className=''>
-              <p className='text-xs px-4 py-2'>Showing {isFiltered ? filteredPost.length : records.length} matching results: </p>
+              <p className='text-sm px-4 py-2'>Showing {isFiltered ? filteredPost.length : records.length} matching results: </p>
               <Posts records={isFiltered ? filteredPost : records} loading={loading}/>
             </div>
             </FadeInOut>

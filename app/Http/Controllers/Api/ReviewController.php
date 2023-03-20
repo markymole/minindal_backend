@@ -20,7 +20,24 @@ class ReviewController extends Controller
     }
 
     public function store(ReviewRequest $request){
-        Reviews::create($request->validated());
+
+        
+        $review = new Reviews;
+        $review->business_name=$request->input('business_name');
+        $review->comments=$request->input('comments');
+        $review->star_rating=$request->input('star_rating');
+        $review->author=$request->input('author');
+
+        if($request->hasFile('imagedata'))
+        {
+            $review->review_image=$request->file('imagedata')->store('reviews');
+            $review->image_name=$request->file('imagedata')->hashName();
+        }
+        else{
+            $review->review_image=('');
+            $review->image_name=('');
+        }
+        $review->save();
         return response()->json("Review Created");
     }
 
@@ -30,6 +47,14 @@ class ReviewController extends Controller
     }
 
     public function destroy(Reviews $review){
+        // $review->delete();
+        // return response()->json("Review Deleted");
+
+        $file = $review->review_image;
+        if (File::exists(public_path($file))) {
+            File::delete(public_path($file));
+        }
+
         $review->delete();
         return response()->json("Review Deleted");
     }

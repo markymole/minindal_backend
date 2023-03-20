@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
-})->middleware(['active_user', 'auth:sanctum']);
+})->middleware('active_user', 'auth:sanctum');
 
 //API's for record move and deletion
 

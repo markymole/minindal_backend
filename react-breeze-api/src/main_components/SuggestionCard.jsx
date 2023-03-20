@@ -33,20 +33,20 @@ function SuggestionCard({record, reviews}){
     }
 
     return(<>
-            <div className="card">
-                    <div className="w-60 lg:60 h-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <div className="card" >
+                    <div className="w-60 md:w-64 lg:w-72">
                         <Link to={`/search/${record.business_name}/${record.id}`} key={record.id}>
                             {/* <img className="rounded-t-lg w-full h-44 object-cover" src="src/assets/.png" alt="" /> */}
                             {
                                 !record?.cover_image ?
-                                <img className="rounded-t-lg w-full h-44 object-cover" src={defImage} alt="" />
+                                <img className="rounded-t-lg w-full h-36 object-cover" src={defImage} alt="" />
                                 :
-                                <img className="rounded-t-lg w-full h-44 object-cover" src={"http://localhost:8000/" + record.cover_image} alt="" />
+                                <img className="rounded-t-lg w-full h-36 object-cover" src={`${import.meta.env.VITE_API_BASE_URL}` + record.cover_image} alt="" />
                             }
                         </Link>
-                        <div className="p-4">
+                        <div className="px-3 py-3 lg:p-4">
                             <Link to={`/search/${record.business_name}/${record.id}`} key={record.id}>
-                                <h5 className="mb-1 text-base lg:text-lg font-bold tracking-tight text-gray-800 dark:text-white">{record.business_name}</h5>
+                                <h5 className="mb-1 text-base lg:text-lg font-bold tracking-tight text-gray-800 ">{record.business_name}</h5>
                             </Link>
                             <div className="flex items-center">
                                 {[...Array(5)].map((x, i) =>
@@ -59,23 +59,24 @@ function SuggestionCard({record, reviews}){
                                     <p className="ml-2 text-[13px] md:text-sm lg:text-text-base font-medium text-gray-500 ">{parseFloat(star_rate / matchingReviews.length).toFixed(1)} out of 5</p>
                                 }
                             </div>
-                            {/* <div className='rounded-md w-full flex items-center flex-wrap gap-2 py-2'>
-                                    {
-                                    record.specialties.split(',').map((specialties, index) => (
-                                        <div className='flex items-center gap-2 px-2 lg:px-4 lg:py-1.5 text-gray-600 bg-gray-300 rounded-sm'  key={index}>
-                                            <span className='text-sm md:text-sm lg:text-base font-base'>{specialties}</span>
-                                        </div> 
-                                        ))
-                                                    
-                                    }
-                                    <p className='text-gray-500'>•</p>
-                                    <p className='text-sm md:text-sm lg:text-base text-gray-500'>{record.category}</p>
-                            </div> */}
-                            <div className='flex gap-1 py-1'>
-                                  <p className='text-[13px] md:text-sm sm:text-xs lg:text-sm text-gray-500'>
-                                  <span className='font-medium text-gray-600'>{record.town}</span> - {record.address}</p>
+                            <div className="line-clamp-1">
+                                <div className='rounded-md w-full  flex items-center flex-wrap gap-2 py-2'>
+                                       {
+                                            record.specialties.split(',').map((specialties, index) => (
+                                                <div className='flex items-center gap-2 px-2 text-gray-500 bg-gray-200 rounded-sm' key={index}>
+                                                <span className='text-[13px] md:text-base  font-medium'>{specialties}</span>
+                                            </div> 
+                                            ))
+                                        
+                                        }
+                                        
+                                </div>
                             </div>
-                            <p className="font-normal text-gray-700 pt-1 text-sm dark:text-gray-400">{record.description}</p>
+                            <div className='flex gap-1 line-clamp-1'>
+                                  <p className='text-[13px] md:text-sm lg:text-base text-gray-500'>
+                                  <span className='font-medium  text-gray-600'>{record.town}</span> - {record.address}</p>
+                            </div>
+                                <p className="font-normal line-clamp-3 md:line-clamp-4 text-gray-700 pt-1 text-[13.5px] lg:text-base ">{record.description}</p>
                         </div>
                     </div>
              </div>

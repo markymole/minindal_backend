@@ -288,13 +288,16 @@ const Pending = () => {
                             <a href="#" className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2 rounded-md focus:bg-gray-100 " onClick={(e) => clearSearch()}>All Category</a>
                         </li>
                         <li>
+                            <a href="#" className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2 rounded-md focus:bg-gray-100 " onClick={(e) => (filterItems(e.target.innerText), setCategoryFilter(e.target.innerText), setTownFilter(''))}>Traditional</a>
+                        </li>
+                        <li>
+                            <a href="#" className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2 rounded-md focus:bg-gray-100 " onClick={(e) => (filterItems(e.target.innerText), setCategoryFilter(e.target.innerText), setTownFilter(''))}>Pastries</a>
+                        </li>
+                        <li>
+                            <a href="#" className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2 rounded-md focus:bg-gray-100 " onClick={(e) => (filterItems(e.target.innerText), setCategoryFilter(e.target.innerText), setTownFilter(''))}>Desserts</a>
+                        </li>
+                        <li>
                             <a href="#" className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2 rounded-md focus:bg-gray-100 " onClick={(e) => (filterItems(e.target.innerText), setCategoryFilter(e.target.innerText), setTownFilter(''))}>Exotic</a>
-                        </li>
-                        <li>
-                            <a href="#" className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2 rounded-md focus:bg-gray-100 " onClick={(e) => (filterItems(e.target.innerText), setCategoryFilter(e.target.innerText), setTownFilter(''))}>Delicacy</a>
-                        </li>
-                        <li>
-                            <a href="#" className="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2 rounded-md focus:bg-gray-100 " onClick={(e) => (filterItems(e.target.innerText), setCategoryFilter(e.target.innerText), setTownFilter(''))}>Sweets</a>
                         </li>
                         {/* <li>
                                 <button className="w-full mt-6 group text-green-900 text-sm bg-green-100 hover:bg-green-400 hover:text-white px-10 py-2 rounded-md transition-colors ease-in-out" type="button">

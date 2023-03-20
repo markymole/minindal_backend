@@ -23,11 +23,13 @@ const CreatePage = () =>
         removeTag,
         o_options,
         handleKeyClick,
-        spinner
+        spinner,
+        setO
     } = useContext(RecordsContext);
     useEffect(() => {
         setErrors({});
         getTowns();
+        setO([]);
     }, []);
 
     const [imagedata, setImageData] = useState("");
@@ -99,7 +101,7 @@ const CreatePage = () =>
                                 <option defaultValue>Select Category</option>
                                 <option value="Traditional">Traditional</option>
                                 <option value="Pastries">Pastries</option>
-                                <option value="Deserts">Deserts</option>
+                                <option value="Desserts">Desserts</option>
                                 <option value="Exotic">Exotic</option>
                         </select>
                       {errors?.category && (<div className='flex'><span className="text-red-400 text-sm m-2 p-2 mt-3">{errors?.category[0]}</span></div>)}
@@ -166,47 +168,88 @@ const CreatePage = () =>
                     <label className="text-sm font-medium text-gray-900 block mb-2">Order Options (Click all application options)</label>
                     <div className='flex gap-2'>
                         <div className="flex items-center gap-2 text-sm">
-                            <div className="flex">
-                                <input type="checkbox" id="dine" value="Walk In" className="peer hidden" onClick={handleOptions} />
-                                <label htmlFor="dine" className="flex items-center gap-2 select-none cursor-pointer rounded-md border border-gray-300
-                                py-2 px-4  text-gray-600 bg-gray-100 transition-colors duration-200 ease-in-out peer-checked:bg-gray-200 peer-checked:text-gray-900"> 
-                                {
-                                    o_options.indexOf("Walk In") > -1 ? 
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-green-700">
-                                        <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
-                                    </svg>:
-                                    <div></div>
-                                }
-                                 
-                                Walk In </label>
-                            </div>
-                            <div className="flex">
-                                <input type="checkbox" id="reservation" value="Reservation" className="peer hidden"  onClick={handleOptions} />
-                                <label htmlFor="reservation" className="flex items-center gap-2 select-none cursor-pointer rounded-md border border-gray-300
-                                py-2 px-4  text-gray-600 bg-gray-100 transition-colors duration-200 ease-in-out peer-checked:bg-gray-200 peer-checked:text-gray-900 "> 
-                                {
-                                    o_options.indexOf("Reservation") > -1 ?
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-green-700">
-                                        <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
-                                    </svg> :
-                                    <div></div>
-                                }
-                                Reservation</label>
-                            </div>
-                            <div className="flex">
-                                <input type="checkbox" id="order" className="peer hidden" value="Delivery"  onClick={handleOptions} />
-                                <label htmlFor="order" className="flex items-center gap-2 select-none cursor-pointer rounded-md border border-gray-300
-                                py-2 px-4  text-gray-600 bg-gray-100 transition-colors duration-200 ease-in-out peer-checked:bg-gray-200 peer-checked:text-gray-900 "> 
-                                {
-                                    o_options.indexOf("Delivery") > -1 ? 
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-green-700">
-                                        <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
-                                    </svg> :
-                                    <div></div>
-                                }
+                                     <div className="flex">
+                                        <input type="checkbox" id="dine" value="Dine-In" className="peer hidden" onClick={handleOptions} />
+                                        <label htmlFor="dine" className="flex items-center gap-2 text-sm md:text-base select-none cursor-pointer rounded-md border border-gray-300
+                                        p-1.5 px-4  text-gray-600 bg-gray-100 transition-colors duration-200 ease-in-out peer-checked:bg-gray-200 peer-checked:text-gray-900"> 
+                                        {
+                                            o_options.indexOf("Dine-In") > -1 ? 
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-green-700">
+                                                <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
+                                            </svg>:
+                                            <div></div>
+                                        }
+                                        
+                                        Dine-In </label>
+                                    </div>
+                                    <div className="flex">
+                                        <input type="checkbox" id="take-out" className="peer hidden" value="Take-Out"  onClick={handleOptions} />
+                                        <label htmlFor="take-out" className="flex items-center gap-2 text-sm md:text-base select-none cursor-pointer rounded-md border border-gray-300
+                                        p-1.5 px-4  text-gray-600 bg-gray-100 transition-colors duration-200 ease-in-out peer-checked:bg-gray-200 peer-checked:text-gray-900 "> 
+                                        {
+                                            o_options.indexOf("Take-Out") > -1 ? 
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-green-700">
+                                                <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
+                                            </svg> :
+                                            <div></div>
+                                        }
 
-                                 Delivery </label>
-                            </div>
+                                        Take-Out </label>
+                                    </div>
+                                    <div className="flex">
+                                        <input type="checkbox" id="delivery" className="peer hidden" value="Delivery"  onClick={handleOptions} />
+                                        <label htmlFor="delivery" className="flex items-center gap-2 text-sm md:text-base select-none cursor-pointer rounded-md border border-gray-300
+                                        p-1.5 px-4  text-gray-600 bg-gray-100 transition-colors duration-200 ease-in-out peer-checked:bg-gray-200 peer-checked:text-gray-900 "> 
+                                        {
+                                            o_options.indexOf("Delivery") > -1 ? 
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-green-700">
+                                                <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
+                                            </svg> :
+                                            <div></div>
+                                        }
+
+                                        Delivery </label>
+                                    </div>
+                                    <div className="flex">
+                                        <input type="checkbox" id="reservation" value="Reservation" className="peer hidden"  onClick={handleOptions} />
+                                        <label htmlFor="reservation" className="flex items-center text-sm md:text-base gap-2 select-none cursor-pointer rounded-md border border-gray-300
+                                        p-1.5 px-4  text-gray-600 bg-gray-100 transition-colors duration-200 ease-in-out peer-checked:bg-gray-200 peer-checked:text-gray-900 "> 
+                                        {
+                                            o_options.indexOf("Reservation") > -1 ?
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-green-700">
+                                                <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
+                                            </svg> :
+                                            <div></div>
+                                        }
+                                        Reservation</label>
+                                    </div>
+                                    {/* <div className="flex">
+                                        <input type="checkbox" id="o_order" value="Online Ordering" className="peer hidden"  onClick={handleOptions} />
+                                        <label htmlFor="o_order" className="flex items-center text-sm md:text-base gap-2 select-none cursor-pointer rounded-md border border-gray-300
+                                        p-1.5 px-4  text-gray-600 bg-gray-100 transition-colors duration-200 ease-in-out peer-checked:bg-gray-200 peer-checked:text-gray-900 "> 
+                                        {
+                                            o_options.indexOf("Online Ordering") > -1 ?
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-green-700">
+                                                <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
+                                            </svg> :
+                                            <div></div>
+                                        }
+                                        Online Ordering</label>
+                                    </div> */}
+                                    <div className="flex">
+                                        <input type="checkbox" id="pasalubong" value="Pasalubong Center" className="peer hidden"  onClick={handleOptions} />
+                                        <label htmlFor="pasalubong" className="flex items-center text-sm md:text-base gap-2 select-none cursor-pointer rounded-md border border-gray-300
+                                        p-1.5 px-4  text-gray-600 bg-gray-100 transition-colors duration-200 ease-in-out peer-checked:bg-gray-200 peer-checked:text-gray-900 "> 
+                                        {
+                                            o_options.indexOf("Pasalubong Center") > -1 ?
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 text-green-700">
+                                                <path fillRule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
+                                            </svg> :
+                                            <div></div>
+                                        }
+                                        Pasalubong Center</label>
+                                    </div>
+                                    
                         </div>
                     </div>
                      {errors?.service_options && (<div className='flex'><span className="text-red-400 text-sm m-2 p-2 mt-3">{errors?.service_options[0]}</span></div>)}

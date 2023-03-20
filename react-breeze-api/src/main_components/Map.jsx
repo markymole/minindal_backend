@@ -74,7 +74,7 @@ function Mapped({records}){
                         }}>
                         <FadeInOut show={selectedMarker} duration={200}>
                         <div className="p-2 w-52">
-                            <img src={"http://localhost:8000/" + selectedMarker.cover_image} alt="" className='object-cover rounded-md w-48' />
+                            <img src={`${import.meta.env.VITE_API_BASE_URL}` + selectedMarker.cover_image} alt="" className='object-cover rounded-md w-48' />
                             <h2 className="font-black mt-2">{selectedMarker.business_name}</h2>
                             <div className="flex items-center">
                                     <svg aria-hidden="true" className={( reviews.filter(review => review.business_name === selectedMarker.business_name).map(reviewContent => (

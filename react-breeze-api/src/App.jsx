@@ -4,6 +4,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 //MAIN APP
 import Main from './main_app/Main'
 import Home from './main_app/Home';
+import LandingPage from './main_app/LandingPage';
 import ViewPage from './main_app/ViewPage';
 import SuggestionPage from './main_app/SuggestionPage';
 import VerifyRegistration from './main_app/VerifyRegistration';
@@ -12,6 +13,7 @@ import VerificationNotice from './main_app/VerificationNotice';
 import ContactPage from './main_app/ContactPage';
 import ReviewPage from './main_app/ReviewPage';
 import Form from './main_app/Form';
+import About from './main_app/About';
 
 //ADMIN - LOGIN PAGES
 import Login from './admin_pages/LoginPage';
@@ -48,6 +50,7 @@ import UserLists from './admin_pages/account/UserLists';
 import AuthLayout from './layouts/AuthLayout';
 import GuestLayout from './layouts/GuestLayout';
 import AuthUserLayout from './layouts/AuthUserLayout';
+import VerifiedLayout from './layouts/VerifiedLayout';
 //404
 import NoPermission from './components/NoPermission';
 import Redirectadmin from './components/redirectadmin';
@@ -61,20 +64,22 @@ export function App() {
         <Routes>
           {/* Main Application Routes */}
 
-          {/* <Route element={<AuthUserLayout/>}> */}
+          <Route element={<VerifiedLayout/>}>
             <Route path="/" element={<Main /> }>
-                <Route index element={<Home />} />
+                <Route index element={<LandingPage />} />
+                <Route path="explore-kapampangan-cuisine" element={<Home />} />
                 <Route path="/search/:business_name/:id" element={<ViewPage />}></Route>
                 <Route path="/writeareview/:business_name/:id" element={<ReviewPage />}></Route>
                 <Route path="discover-hidden-treasures" element={<SuggestionPage />}></Route>
-                <Route path="about-us" element={<Form />}></Route>
+                <Route path="about-us" element={<About />}></Route>
+                <Route path="contribute" element={<Form />}></Route>
                 <Route path="contact-us" element={<ContactPage />}></Route>
                 <Route path="success" element={<Sucess />}></Route>
             </Route>
-          {/* </Route> */}
+          </Route>
        
           <Route path="/403" element={<NoPermission />}/>
-                    <Route path='*'  element={<NoRoute />}/>
+          <Route path='*'  element={<NoRoute />}/>
           <Route path="/redirect" element={<Redirectadmin />}/>
           <Route path="/verify" element={<VerifyRegistration />}/>
           <Route path="/register" element={<Register />}/>

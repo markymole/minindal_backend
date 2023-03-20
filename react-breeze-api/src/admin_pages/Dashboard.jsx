@@ -1,5 +1,4 @@
 import React, {useState, useEffect, useContext, useRef,} from 'react'
-import userProfile from '../assets/DA-7.png';
 import { Link } from 'react-router-dom';
 import Authentication from '../context/Authentication';
 import RecordsContext from '../context/RecordsContext';
@@ -7,7 +6,7 @@ import TopHeading from '../components/TopHeading';
 
 export function Dashboard(){
     const { user, users, getUser, getUsers } = Authentication()
-    const {  getTowns, loading, towns, records, pendingRecords, archives, getArchives, getRecords, getPendings} = useContext(RecordsContext);
+    const {  getTowns, loading, towns, records, reviews, pendingRecords, archives, getArchives, getRecords, getPendings, getReviews} = useContext(RecordsContext);
     
     useEffect(()=>{
         getRecords();
@@ -15,6 +14,7 @@ export function Dashboard(){
         getArchives();
         getTowns();
         getUsers();
+        getReviews();
     },[])
 
 
@@ -63,8 +63,8 @@ export function Dashboard(){
                     </div>
                 </div>
                 <div className='overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg p-6 bg-white space-y w-1/2 text-center'>
-                    <h5 className='font-bold text-xl italic'>Center for Kamapangan Studies</h5>
-                    <p className='text-sm text-gray-600'>Authentic Kapampangan Food Dashboard</p>
+                    <h5 className='font-bold text-xl italic'>Minindal: A Kapampangan Food Directory Hub</h5>
+                    <p className='text-sm text-gray-600'>Center for Kapampangan Studies</p>
                 </div>
             </div>
             <div className='mt-8'>
@@ -397,8 +397,8 @@ export function Dashboard(){
                                 </div>
                             </div>
                             <div className="block w-full bg-white">
-                                <div className="px-4 flex justify-between bg-gray-100  text-gray-500  align-middle border border-solid border-gray-200  py-3 text-sm border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                <p> Pending Records</p>
+                                <div className="px-4 flex justify-between bg-gray-100  text-gray-500  align-middle border border-solid border-gray-200  py-3 text-sm border-l-0 border-r-0 whitespace-nowrap text-left">
+                                <p className='font-semibold uppercase text-xs'> Pending Records</p>
                                             <Link to='/dashboard/pending-records/' className="flex items-center hover:underline font-medium text-blue-500 hover:text-blue-600" >
                                                 See All<span><svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" className="transform transition-transform duration-500 ease-in-out"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg></span>
                                             </Link>                                
@@ -430,27 +430,33 @@ export function Dashboard(){
 
                               
                                 </ul>
-                                <div className="px-4 bg-gray-100  text-gray-500  align-middle border border-solid border-gray-200  py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                Comments
+                                <div className="px-4 flex justify-between bg-gray-100  text-gray-500  align-middle border border-solid border-gray-200  py-3 text-sm border-l-0 border-r-0 whitespace-nowrap text-left">
+                                <p className='font-semibold uppercase text-xs'> Reviews</p>
+                                            <Link to='/dashboard/reviews/' className="flex items-center hover:underline font-medium text-blue-500 hover:text-blue-600" >
+                                                See All<span><svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" className="transform transition-transform duration-500 ease-in-out"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg></span>
+                                            </Link>                                
                                 </div>
                                 <ul className="">
-                                <li className="flex px-4 cursor-default hover:bg-gray-100">
-                                    <div className="w-9 h-9 rounded-full flex-shrink-0 bg-indigo-500 my-2 mr-3">
-                                    <svg className="w-9 h-9 fill-current text-indigo-50" viewBox="0 0 36 36"><path d="M18 10c-4.4 0-8 3.1-8 7s3.6 7 8 7h.6l5.4 2v-4.4c1.2-1.2 2-2.8 2-4.6 0-3.9-3.6-7-8-7zm4 10.8v2.3L18.9 22H18c-3.3 0-6-2.2-6-5s2.7-5 6-5 6 2.2 6 5c0 2.2-2 3.8-2 3.8z"></path></svg>
-                                    </div>
-                                    <div className="flex-grow flex items-center border-b border-gray-100  text-sm text-gray-600  py-2">
-                                    <div className="flex-grow flex justify-between items-center">
-                                        <div className="self-center">
-                                        <a className="font-medium text-gray-800 hover:text-gray-900  " href="#0">Nick Mark</a> mentioned <a className="font-medium text-gray-800" href="#0">Sara Smith</a> in a new post
-                                        </div>
-                                        <div className="flex-shrink-0 ml-2">
-                                        <a className="flex items-center font-medium text-blue-500 hover:text-blue-600 " href="#0">
-                                            View<span><svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" className="transform transition-transform duration-500 ease-in-out"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg></span>
-                                        </a>
-                                        </div>
-                                    </div>
-                                    </div>
-                                </li>
+                                    {
+                                         reviews?.slice(0,2).map((review) => {
+                                            return(
+                                                <li className="flex px-4 cursor-default hover:bg-gray-100" key={review.id}>
+                                                    <div className="w-9 h-9 rounded-full flex-shrink-0 bg-indigo-500 my-2 mr-3">
+                                                    <svg className="w-9 h-9 fill-current text-indigo-50" viewBox="0 0 36 36"><path d="M18 10c-4.4 0-8 3.1-8 7s3.6 7 8 7h.6l5.4 2v-4.4c1.2-1.2 2-2.8 2-4.6 0-3.9-3.6-7-8-7zm4 10.8v2.3L18.9 22H18c-3.3 0-6-2.2-6-5s2.7-5 6-5 6 2.2 6 5c0 2.2-2 3.8-2 3.8z"></path></svg>
+                                                    </div>
+                                                    <div className="flex-grow flex items-center border-b border-gray-100  text-sm text-gray-600  py-2">
+                                                    <div className="flex-grow flex justify-between items-center">
+                                                        <div className="self-center">
+                                                        <a className="font-medium text-gray-800 hover:text-gray-900  " href="#0">{review.author}</a> reviewed <a className="font-medium text-gray-800" href="#0">{review.business_name}</a> with a rating of {review.star_rating}
+                                                        </div>
+                                                     
+                                                    </div>
+                                                    </div>
+                                                </li>
+                                            )
+                                        })
+                                    }
+                              
                                 </ul>
                             </div>
                             </div>

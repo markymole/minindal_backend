@@ -4,18 +4,26 @@ import { Link } from 'react-router-dom';
 import useAuthContext from '../context/Authentication';
 
 const Register = () => {
+    const [show, setShow] = useState(false);
+    const [show2, setShow2] = useState(false);
+
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
     const [password_confirmation, setPassword_Confirmation] = useState("");
     const role = "User";
     const town = "N/A";
-    const { register, errors, loginerror, spinner } = useAuthContext();
+    const { register, errors, loginerror, setErrors, spinner } = useAuthContext();
 
     const handleLogin = async (event) => {
         event.preventDefault();
         register({ name, email, password, password_confirmation, town, role });
     };
+
+    useEffect(() => {
+        setErrors([]);
+    }, []);
 
   return (
     <div>
@@ -28,10 +36,9 @@ const Register = () => {
             <form onSubmit={handleLogin}>
             <div className="px-10 py-12">
                 <h2 className='font-bold text-start text-lg mb-5'>Create Your Account</h2>
-                {loginerror && (<p className='bg-red-100 py-2 px-3 mb-3 text-red-500 text-sm rounded-md border border-red-300'>Your account is blocked, please contact the admin. </p>)}
                     <div className='w-full'>
                         <label className="font-semibold text-sm text-gray-600 pb-1 block">E-mail</label>
-                        <input type="email" name='email' placeholder='test@example.com' value={email} onChange={(e) => setEmail(e.target.value)} className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
+                        <input type="email" name='email' placeholder='your@email.com' value={email} onChange={(e) => setEmail(e.target.value)} className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
                         {errors.email && (<div className='flex'><span className="text-red-400 text-sm m-2 p-2 -mt-3">{errors.email[0]}</span></div>)}
                     </div>
                     <div className='w-full'>
@@ -43,12 +50,44 @@ const Register = () => {
                 <div className='md:flex gap-4'>
                     <div className='w-full'>
                         <label className="font-semibold text-sm text-gray-600 pb-1 block">Password</label>
-                        <input type="password" name='password' value={password} onChange={(e) => setPassword(e.target.value)} className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"  />
+                        {/* <input type="password" name='password' value={password} onChange={(e) => setPassword(e.target.value)} className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"  /> */}
+                        <div className='border rounded-lg mb-5 text-sm w-full flex items-center'>
+                            <input type={show? "text" : "password"} value={password} placeholder='password' onChange={(e) => setPassword(e.target.value)} className="px-3 py-2 w-full rounded-lg focus:outline-none"  />
+                            {
+                                show ? 
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 mr-2 text-green-600" onClick={() => setShow(!show)}>
+                                    <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                                    <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clipRule="evenodd" />
+                                </svg>
+                                :
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 mr-2 text-gray-600" onClick={() => setShow(!show)}>
+                                    <path d="M3.53 2.47a.75.75 0 00-1.06 1.06l18 18a.75.75 0 101.06-1.06l-18-18zM22.676 12.553a11.249 11.249 0 01-2.631 4.31l-3.099-3.099a5.25 5.25 0 00-6.71-6.71L7.759 4.577a11.217 11.217 0 014.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113z" />
+                                    <path d="M15.75 12c0 .18-.013.357-.037.53l-4.244-4.243A3.75 3.75 0 0115.75 12zM12.53 15.713l-4.243-4.244a3.75 3.75 0 004.243 4.243z" />
+                                    <path d="M6.75 12c0-.619.107-1.213.304-1.764l-3.1-3.1a11.25 11.25 0 00-2.63 4.31c-.12.362-.12.752 0 1.114 1.489 4.467 5.704 7.69 10.675 7.69 1.5 0 2.933-.294 4.242-.827l-2.477-2.477A5.25 5.25 0 016.75 12z" />
+                                </svg>                      
+                            }
+                        </div>
                         {errors.password && (<div className='flex'><span className="text-red-400 text-sm m-2 p-2 -mt-3">{errors.password[0]}</span></div>)}
                     </div>
                     <div className='w-full'>
                         <label className="font-semibold text-sm text-gray-600 pb-1 block">Confirm Password</label>
-                        <input type="password" name='password_confirmation' value={password_confirmation} onChange={(e) => setPassword_Confirmation(e.target.value)} className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"  />
+                        {/* <input type="password" name='password_confirmation' value={password_confirmation} onChange={(e) => setPassword_Confirmation(e.target.value)} className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"  /> */}
+                        <div className='border rounded-lg mb-5 text-sm w-full flex items-center'>
+                        <input type={show2? "text" : "password"} value={password_confirmation} placeholder='confirm password' onChange={(e) => setPassword_Confirmation(e.target.value)} className="px-3 py-2 w-full rounded-lg focus:outline-none"  />
+                            {
+                                show2 ? 
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 mr-2 text-green-600" onClick={() => setShow2(!show2)}>
+                                    <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" />
+                                    <path fill-rule="evenodd" d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 010-1.113zM17.25 12a5.25 5.25 0 11-10.5 0 5.25 5.25 0 0110.5 0z" clip-rule="evenodd" />
+                                </svg>
+                                :
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 mr-2 text-gray-600" onClick={() => setShow2(!show2)}>
+                                    <path d="M3.53 2.47a.75.75 0 00-1.06 1.06l18 18a.75.75 0 101.06-1.06l-18-18zM22.676 12.553a11.249 11.249 0 01-2.631 4.31l-3.099-3.099a5.25 5.25 0 00-6.71-6.71L7.759 4.577a11.217 11.217 0 014.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113z" />
+                                    <path d="M15.75 12c0 .18-.013.357-.037.53l-4.244-4.243A3.75 3.75 0 0115.75 12zM12.53 15.713l-4.243-4.244a3.75 3.75 0 004.243 4.243z" />
+                                    <path d="M6.75 12c0-.619.107-1.213.304-1.764l-3.1-3.1a11.25 11.25 0 00-2.63 4.31c-.12.362-.12.752 0 1.114 1.489 4.467 5.704 7.69 10.675 7.69 1.5 0 2.933-.294 4.242-.827l-2.477-2.477A5.25 5.25 0 016.75 12z" />
+                                </svg>                      
+                            }
+                        </div>
                         {errors.password_confirmation && (<div className='flex'><span className="text-red-400 text-sm m-2 p-2 -mt-3">{errors.password_confirmation[0]}</span></div>)}
                     </div>
                 </div>

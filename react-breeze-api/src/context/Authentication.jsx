@@ -7,7 +7,7 @@ const Auth = createContext({});
 import AppContext from './Context';
 
 export const Authentication = ({ children }) => {
-      
+
     const { closeLoginModal } = useContext(AppContext);
     const initialForm = {
         name: "",
@@ -39,7 +39,7 @@ export const Authentication = ({ children }) => {
     const [result, setResult] = useState(null);
     const [updateResult, setUpdateResult] = useState(null);
     const [errors, setErrors] = useState([]);
-    const [loginerror, setLoginError] = useState(false);
+    const [loginerror, setLoginError] = useState("");
 
     function closeResult(){
       setTimeout(() => {
@@ -63,10 +63,10 @@ export const Authentication = ({ children }) => {
 
     const navigate = useNavigate();
 
-    const csrf = () => axios.get("/sanctum/csrf-cookie");
+    const csrf = () => axios.get("sanctum/csrf-cookie");
     
     const getUser = async () => {
-      const {data} = await axios.get('/api/user');
+      const {data} = await axios.get('api/user');
       setUser(data);
       setUserFormValues({
         name: data.name,
@@ -104,45 +104,41 @@ export const Authentication = ({ children }) => {
 
     const login = async ({ email, password}) => {
       await csrf();
-      setLoginError(false);
+      setLoginError("");
       setErrors([]);
       setSpinner(true);
-      // document.getElementById('login').disabled = true;
-      // document.getElementById('login').innerText = "Signing in...";
       try {
-        await axios.post('/login',  {email, password} );
+        await axios.post('login',  {email, password} );
         await getUser();
         navigate("/dashboard");
-        setLoginError(false);
+        setLoginError("");
       } catch(e) {
         if (e.response.status === 422){
           setErrors(e.response.data.errors);
         }
         else{
-          setLoginError(true);
+          setLoginError(e.response.data.message);
         }
       }
       setSpinner(false);
-      // document.getElementById('login').disabled = false;
-      // document.getElementById('login').innerText = "Sign in";
     };
 
     const guestLogin = async ({ email, password}) => {
       await csrf();
-      setLoginError(false);
+      setLoginError("");
       setErrors([]);
       setSpinner(true);
       try {
-        await axios.post('/login',  {email, password} );
+        await axios.post('login',  {email, password} );
         await getUser();
-        setLoginError(false);
         closeLoginModal();
       } catch(e) {
+        console.log(e.response);
         if (e.response.status === 422){
           setErrors(e.response.data.errors);
         }
         else{
-          setLoginError(true);
+          setLoginError(e.response.data.message);
         }
       }
       setSpinner(false);
@@ -154,7 +150,7 @@ export const Authentication = ({ children }) => {
       setSpinner(true);
       setErrors([]);
       try {
-        const response = await axios.post('/register', {name, email, password, password_confirmation, town, role});
+        const response = await axios.post('register', {name, email, password, password_confirmation, town, role});
         navigate("/register-verification");
         console.log(response.status);
       } catch(e) {

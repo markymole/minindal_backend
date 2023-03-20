@@ -20,6 +20,8 @@ class ReviewResource extends JsonResource
             'comments' => $this->comments,
             'star_rating' => $this->star_rating,
             'author' => $this->author,
+            'review_image' => $this->review_image,
+            'image_name' => $this->image_name,
             'created_at' => $this->created_at
 
         ];

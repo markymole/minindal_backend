@@ -20,6 +20,7 @@ class AuthController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'role' => ['required', 'string', 'max:255'],
             'town' => ['required', 'string', 'max:255'],
+
         ]);
 
         $user = User::create([
@@ -30,7 +31,9 @@ class AuthController extends Controller
             'role' => $fields['role'],
             'town' => $fields['town']
         ]);
-        
+
+        $user->markEmailAsVerified();
+
         $response = [
             'user' => $user,
         ];
