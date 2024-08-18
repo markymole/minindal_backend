@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Models\User;
 use Illuminate\Http\Response;
 use App\http\Resources\UserCollection;
+use App\http\Resources\UserResource;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -26,5 +27,4 @@ class UserController extends Controller
         );
 
     }
-
 }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\http\Requests\StoreRecordRequest;
-use App\http\Resources\RecordResource;
-use App\http\Resources\RecordCollection;
+use App\Http\Requests\StoreRecordRequest;
+use App\Http\Resources\RecordResource;
+use App\Http\Resources\RecordCollection;
 use App\Models\Records;
 use Illuminate\Http\Request;
 
@@ -16,8 +16,20 @@ use File;
 
 class RecordController extends Controller
 {
-    public function index(){
-        return new RecordCollection(Records::all());
+    // public function index(){
+    //     return new RecordCollection(Records::all());
+    // }
+
+    public function index(Request $request)
+    {
+        // You can set a default number of items per page, e.g., 15
+        $perPage = $request->input('per_page', 15);
+
+        // Use the paginate method and pass the per-page value
+        $records = Records::paginate($perPage);
+
+        // Return the paginated results
+        return new RecordCollection($records);
     }
 
     public function show(Records $record){
@@ -37,8 +49,6 @@ class RecordController extends Controller
         $record->open_to=$request->input('open_to');
         $record->service_options=$request->input('service_options');
         $record->rating=$request->input('rating');
-
-
         $record->category=$request->input('category');
         $record->specialties=$request->input('specialties');
         $record->phone_number_one=$request->input('phone_number_one');
