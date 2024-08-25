@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\RecordController;
+use App\Http\Controllers\Records\RecordsController;
+
 use App\Http\Controllers\Api\ArchiveController;
 use App\Http\Controllers\Api\PendingController;
 use App\Http\Controllers\Api\UnarchiveController;
@@ -75,9 +76,8 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::apiResource('usergroup', UserController::class);
 });
 
-Route::group(['prefix' => 'data'], function() {
-    Route::apiResource('records', RecordController::class);
-});
+Route::apiResource('records', RecordsController::class);
+
 
 Route::group(['prefix' => 'data'], function() {
     Route::apiResource('archives', ArchiveController::class);
