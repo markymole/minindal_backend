@@ -25,7 +25,7 @@ class RecordsController extends Controller
     public function index(Request $request)
     {
 
-        $fetchAll = $request->query('all', false);
+        $fetchAll = $request->query('all') === 'true';
 
         $perPage = $request->input('per_page', 15);
 
