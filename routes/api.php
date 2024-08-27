@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Records\RecordsController;
+use App\Http\Controllers\Records\SpecialtiesController;
 
 use App\Http\Controllers\Api\ArchiveController;
 use App\Http\Controllers\Api\PendingController;
@@ -77,6 +78,12 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 });
 
 Route::apiResource('records', RecordsController::class);
+
+// Specialties routes
+Route::get('/specialties/suggestions', [SpecialtiesController::class, 'getSpecialtiesSuggestions']);
+
+Route::get('/specialties/search', [SpecialtiesController::class, 'searchSpecialties']);
+
 
 
 Route::group(['prefix' => 'data'], function() {
