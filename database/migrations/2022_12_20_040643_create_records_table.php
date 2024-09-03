@@ -16,32 +16,21 @@ return new class extends Migration
         Schema::create('records', function (Blueprint $table) {
             $table->id();
             $table->string('business_name');
-            $table->text('description');
-            //authentic or modern kapampangan
-            $table->string('type');
-            //pastries, exotic, etc
-            $table->string('category');
-            $table->text('specialties');
-            $table->string('price_range');
-            $table->string('operating_from');
-            $table->string('operating_to');
-            $table->string('open_from');
-            $table->string('open_to');
-            $table->decimal('rating');
-            //wheter it is only for dine in, take-out, delivery, order
-            $table->string('service_options');
-            $table->string('phone_number_one')->nullable();
-            $table->string('phone_number_two')->nullable();
-            $table->string('email')->nullable();
-            $table->string('socials')->nullable();
+            $table->text('description')->nullable();
+            $table->string('specialties')->nullable();
+            $table->string('category')->nullable(); // other general categories
+            $table->json('open')->nullable(); 
+            $table->json('operating_hours')->nullable(); // Refactor operating_from and operating_to
+            $table->json('coordinates')->nullable(); // Refactor latitude and longitude
+            $table->decimal('rating', 3, 2)->nullable();
+            $table->string('phone_numbers')->nullable();
             $table->string('cover_image')->nullable();
             $table->string('image_name')->nullable();
-            $table->string('town');
-            $table->text('address');
-            $table->decimal('latitude', 23, 15);
-            $table->decimal('longitude', 23, 15);
+            $table->string('town')->nullable();
+            $table->string('address')->nullable();
             $table->date('date_applied')->nullable();
             $table->date('date_approved')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

@@ -16,50 +16,28 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        \App\Models\Towns::factory()->create([
-            'town' => 'Angeles',
-            'Slug' => 'Angeles',
-            'latitude' => 15.144985,
-            'longitude' => 120.588699
+        \App\Models\User::factory()->create([
+            'name' => 'Mark Raphael D Nuguid',
+            'email' => 'nmark.raphael07@gmail.com',
+            'role' => 'Admin',
+            'town' => null,
+            'status' => null
         ]);
-        \App\Models\Towns::factory()->create([
-            'town' => 'Mabalacat',
-            'Slug' => 'Mabalacat',
-            'latitude' => 15.222660,
-            'longitude' => 120.574089
-        ]);
-        \App\Models\Towns::factory()->create([
-            'town' => 'San Fernando',
-            'Slug' => 'San Fernando',
-            'latitude' => 15.067630,
-            'longitude' => 120.648918
-        ]);
-        \App\Models\Towns::factory()->create([
-            'town' => 'Porac',
-            'Slug' => 'Porac',
-            'latitude' => 15.068016,
-            'longitude' => 120.540223
-        ]);
-        \App\Models\Towns::factory()->create([
-            'town' => 'Magalang',
-            'Slug' => 'Magalang',
-            'latitude' => 15.210852,
-            'longitude' => 120.660346
-        ]);
-        
 
         \App\Models\User::factory()->create([
             'name' => 'Center for Kapampangan Studies',
-            'email' => 'ckskapampangancuisine@gmail.com',
-            'role' => 'Super Admin',
-            'town' => 'CKS'
+            'email' => 'kapampangancentergmail.com',
+            'role' => 'Admin',
+            'town' => null,
+            'status' => null
         ]);
 
         \App\Models\User::factory()->create([
             'name' => 'user',
             'email' => 'user@example.com',
-            'role' => 'user',
-            'town' => 'N/A'
+            'role' => 'User',
+            'town' => null,
+            'status' => null
         ]);
     }
 }

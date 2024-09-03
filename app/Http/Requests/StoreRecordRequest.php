@@ -27,29 +27,35 @@ class StoreRecordRequest extends FormRequest
         return [
             'business_name' => ['required', 'string', Rule::unique('records')->ignore($this->record)],
             'description' => ['required', 'string'],
-            'type' => ['required', 'string'],
-            'operating_from' => ['required', 'string'],
-            'operating_to' => ['required', 'string'],
-            'open_from' => ['required', 'string'],
-            'open_to' => ['required', 'string'],
-            'price_range' => ['required', 'string'],
-            'service_options' => ['required', 'string'],
+            'specialties' => ['required', 'string'], // Assuming specialties is a JSON string
+            
+            // Updated for operating_hours
+            'operating_hours' => ['required', 'array'],
+            'operating_hours.from' => ['required', 'string'],
+            'operating_hours.to' => ['required', 'string'],
+
+            // Updated for operating_hours
+            'open' => ['required', 'array'],
+            'open.from' => ['required', 'string'],
+            'open.to' => ['required', 'string'],
+        
             'category' => ['required', 'string'],
-            'specialties' => ['required', 'string'],
             'rating' => ['nullable', 'numeric'],
-            'phone_number_one' => ['required', 'string'],
-            'phone_number_two' => ['nullable', 'string'],
-            'email' => ['nullable', 'email'],
-            'socials' => ['nullable', 'string'],
+            'phone_numbers' => ['required', 'array', 'string'],
             'town' => ['required', 'string'],
             'address' => ['required', 'string'],
-            'latitude' => ['required', 'numeric'],
-            'longitude' => ['required', 'numeric'],
+            
+            // Updated for coordinates
+            'coordinates' => ['required', 'array'],
+            'coordinates.latitude' => ['required', 'numeric'],
+            'coordinates.longitude' => ['required', 'numeric'],
+            
             'cover_image' => ['nullable'],
             'image_name' => ['nullable'],
             'imagedata' => ['nullable', 'image', 'mimes:jpeg,jpg,png,svg,gif'],
             'date_applied' => ['nullable', 'date'],
-            'date_approved' => ['nullable', 'date']
+            'date_approved' => ['nullable', 'date'],
+            'status' => ['nullable', 'string']
         ];
     }
     

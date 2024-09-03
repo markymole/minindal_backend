@@ -40,23 +40,11 @@ Route::group(['prefix' => 'data'], function() {
 });
 
 Route::group(['prefix' => 'data'], function() {
-    Route::apiResource('unarchive', UnarchiveController::class);
-});
-
-Route::group(['prefix' => 'data'], function() {
     Route::apiResource('reviews', ReviewController::class);
 });
 
 Route::group(['prefix' => 'data'], function() {
     Route::apiResource('comments', CommentController::class);
-});
-
-Route::group(['prefix' => 'data'], function() {
-    Route::apiResource('archive', ArchivePost::class);
-});
-
-Route::group(['prefix' => 'data'], function() {
-    Route::apiResource('approve', ApproveController::class);
 });
 
 //API for user data update , only for name and email. Password are requested thrue email
@@ -83,16 +71,6 @@ Route::apiResource('records', RecordsController::class);
 Route::get('/specialties/suggestions', [SpecialtiesController::class, 'getSpecialtiesSuggestions']);
 
 Route::get('/specialties/search', [SpecialtiesController::class, 'searchSpecialties']);
-
-
-
-Route::group(['prefix' => 'data'], function() {
-    Route::apiResource('archives', ArchiveController::class);
-});
-
-Route::group(['prefix' => 'data'], function() {
-    Route::apiResource('pendings', PendingController::class);
-});
 
 Route::group(['prefix' => 'data'], function() {
     Route::apiResource('towns', TownController::class);

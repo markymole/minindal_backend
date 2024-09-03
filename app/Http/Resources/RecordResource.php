@@ -18,28 +18,36 @@ class RecordResource extends JsonResource
             'id' => $this->id,
             'business_name' => $this->business_name,
             'description' => $this->description,
-            'type' => $this->type,
-            'price_range' => $this->price_range,
-            'operating_from' => $this->operating_from,
-            'operating_to' => $this->operating_to,
-            'open_from' => $this->open_from,
-            'open_to' => $this->open_to,
-            'rating' => $this->rating,
-            'service_options' => $this->service_options,
-            'category' => $this->category,
             'specialties' => $this->specialties,
-            'phone_number_one' => $this->phone_number_one,
-            'phone_number_two' => $this->phone_number_two,
-            'email' => $this->email,
-            'socials' => $this->socials,
+            
+            // Updated to reflect the operating_hours object
+            'operating_hours' => [
+                'from' => json_decode($this->operating_hours, true)['from'] ?? null,
+                'to' => json_decode($this->operating_hours, true)['to'] ?? null,
+            ],
+
+            'open' => [
+                'from' => json_decode($this->open, true)['from'] ?? null,
+                'to' => json_decode($this->open, true)['to'] ?? null,
+            ],
+            
+            'rating' => $this->rating,
+            'category' => $this->category,
+            'phone_numbers' => $this->phone_numbers,
             'cover_image' => $this->cover_image,
             'image_name' => $this->image_name,
             'town' => $this->town,
             'address' => $this->address,
-            'latitude' => $this->latitude,
-            'longitude' => $this->longitude,
+            
+            // Updated to reflect the coordinates object
+            'coordinates' => [
+                'latitude' => json_decode($this->coordinates, true)['latitude'] ?? null,
+                'longitude' => json_decode($this->coordinates, true)['longitude'] ?? null,
+            ],
+            
             'date_applied' => $this->date_applied,
-            'date_approved' => $this->date_approved  
+            'date_approved' => $this->date_approved,
+            'status' => $this->status,
         ];
     }
 }

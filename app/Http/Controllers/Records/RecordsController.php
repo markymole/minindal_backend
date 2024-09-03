@@ -13,6 +13,11 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class RecordsController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['update', 'destroy']);
+    }
     /**
      * Display a listing of the records with pagination or all records.
      *
@@ -34,6 +39,10 @@ class RecordsController extends Controller
 
         if ($town = $request->query('town')) {
             $query->where('town', $town);
+        }
+
+        if ($status = $request->query('status')) {
+            $query->where('status', $status);
         }
 
         if ($food = $request->query('food')) {
@@ -125,35 +134,4 @@ class RecordsController extends Controller
         return response()->json(['message' => 'Record Deleted']);
     }
 
-
-    /** 
-     * Gets list of specialties on all records
-     */
-    // public function getSpecialties(Request $request)
-    // {
-    //     $searchTerm = strtolower(trim($request->query('food')));
-    //     $town = strtolower(trim($request->query('town'))); 
-
-    
-    //     $query = Records::query();
-
-    //     if ($town) {
-    //         $query->where('town', $town);
-    //     }
-
-    //     $specialties = $query->pluck('specialties') 
-    //         ->map(function ($specialty) {
-    //             return array_map('trim', explode(',', $specialty)); 
-    //         })
-    //         ->flatten() 
-    //         ->unique() 
-    //         ->filter(fn($item) => !empty($item)); 
-
-    //     if ($searchTerm) {
-    //         $specialties = $specialties->filter(fn($item) => stripos(strtolower($item), $searchTerm) !== false);
-    //     }
-
-    //     return response()->json($specialties->values());
-    // }
-    
 }
