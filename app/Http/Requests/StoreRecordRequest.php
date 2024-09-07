@@ -30,25 +30,25 @@ class StoreRecordRequest extends FormRequest
             'specialties' => ['required', 'string'], // Assuming specialties is a JSON string
             
             // Updated for operating_hours
-            'operating_hours' => ['required', 'array'],
-            'operating_hours.from' => ['required', 'string'],
-            'operating_hours.to' => ['required', 'string'],
+            // 'operating_hours' => ['required', 'array'],
+            'operating_hours.from' => ['required'],
+            'operating_hours.to' => ['required'],
 
             // Updated for operating_hours
-            'open' => ['required', 'array'],
-            'open.from' => ['required', 'string'],
-            'open.to' => ['required', 'string'],
+            // 'open' => ['required', 'array'],
+            'open.from' => ['required'],
+            'open.to' => ['required'],
         
-            'category' => ['required', 'string'],
+            'category' => ['nullable', 'string'],
             'rating' => ['nullable', 'numeric'],
-            'phone_numbers' => ['required', 'array', 'string'],
+            'phone_numbers' => ['required', 'string'],
             'town' => ['required', 'string'],
             'address' => ['required', 'string'],
             
             // Updated for coordinates
-            'coordinates' => ['required', 'array'],
-            'coordinates.latitude' => ['required', 'numeric'],
-            'coordinates.longitude' => ['required', 'numeric'],
+            // 'coordinates' => ['required', 'array'],
+            'coordinates.latitude' => ['required'],
+            'coordinates.longitude' => ['required'],
             
             'cover_image' => ['nullable'],
             'image_name' => ['nullable'],

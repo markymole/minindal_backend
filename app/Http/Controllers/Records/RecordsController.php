@@ -78,16 +78,33 @@ class RecordsController extends Controller
     public function store(StoreRecordRequest $request)
     {
         $data = $request->validated();
+        
+        $data['operating_hours'] = json_encode([
+            'from' => $request->input('operating_hours.from'),
+            'to' => $request->input('operating_hours.to'),
+        ]);
+    
+        $data['open'] = json_encode([
+            'from' => $request->input('open.from'),
+            'to' => $request->input('open.to'),
+        ]);
+    
+        $data['coordinates'] = json_encode([
+            'latitude' => $request->input('coordinates.latitude'),
+            'longitude' => $request->input('coordinates.longitude'),
+        ]);
 
         // Handle file upload
         if ($request->hasFile('imagedata')) {
-            $data['cover_image'] = $request->file('imagedata')->store('records');
+            $path = $request->file('imagedata')->store('records', 'public');
+        
+            $data['cover_image'] = $path; 
             $data['image_name'] = $request->file('imagedata')->hashName();
         }
 
         $record = Records::create($data);
 
-        return response()->json(['message' => 'Record Created', 'data' => new RecordResource($record)], 201);
+        return response()->json(['message' => 'Record Created', 'data' => new RecordResource($record)], 200);
     }
 
     /**

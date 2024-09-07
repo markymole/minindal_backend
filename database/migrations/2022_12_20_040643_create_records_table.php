@@ -16,21 +16,21 @@ return new class extends Migration
         Schema::create('records', function (Blueprint $table) {
             $table->id();
             $table->string('business_name');
-            $table->text('description')->nullable();
-            $table->string('specialties')->nullable();
+            $table->text('description');
+            $table->string('specialties');
             $table->string('category')->nullable(); // other general categories
-            $table->json('open')->nullable(); 
-            $table->json('operating_hours')->nullable(); // Refactor operating_from and operating_to
-            $table->json('coordinates')->nullable(); // Refactor latitude and longitude
+            $table->json('open'); 
+            $table->json('operating_hours'); // Refactor operating_from and operating_to
+            $table->json('coordinates'); // Refactor latitude and longitude
             $table->decimal('rating', 3, 2)->nullable();
             $table->string('phone_numbers')->nullable();
             $table->string('cover_image')->nullable();
             $table->string('image_name')->nullable();
-            $table->string('town')->nullable();
-            $table->string('address')->nullable();
+            $table->string('town');
+            $table->string('address');
             $table->date('date_applied')->nullable();
             $table->date('date_approved')->nullable();
-            $table->string('status')->nullable();
+            $table->string('status');
             $table->timestamps();
         });
     }
