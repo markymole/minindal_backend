@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Records\RecordsController;
 use App\Http\Controllers\Records\SpecialtiesController;
+use App\Http\Controllers\Records\ImageController;
 
 use App\Http\Controllers\Api\ArchiveController;
 use App\Http\Controllers\Api\PendingController;
@@ -66,6 +67,8 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 });
 
 Route::apiResource('records', RecordsController::class);
+
+Route::post('/record/image/{id}/update', [ImageController::class, 'updateImage']);
 
 // Specialties routes
 Route::get('/specialties/suggestions', [SpecialtiesController::class, 'getSpecialtiesSuggestions']);

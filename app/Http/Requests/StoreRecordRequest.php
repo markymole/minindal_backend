@@ -25,7 +25,7 @@ class StoreRecordRequest extends FormRequest
     public function rules()
     {
         return [
-            'business_name' => ['required', 'string', Rule::unique('records')->ignore($this->record)],
+            'business_name' => ['required', 'string'],
             'description' => ['required', 'string'],
             'specialties' => ['required', 'string'], // Assuming specialties is a JSON string
             
@@ -36,8 +36,8 @@ class StoreRecordRequest extends FormRequest
 
             // Updated for operating_hours
             // 'open' => ['required', 'array'],
-            'open.from' => ['required'],
-            'open.to' => ['required'],
+            'open.from' => ['required', 'string'],
+            'open.to' => ['required', 'string'],
         
             'category' => ['nullable', 'string'],
             'rating' => ['nullable', 'numeric'],
@@ -47,12 +47,12 @@ class StoreRecordRequest extends FormRequest
             
             // Updated for coordinates
             // 'coordinates' => ['required', 'array'],
-            'coordinates.latitude' => ['required'],
-            'coordinates.longitude' => ['required'],
+            'coordinates.latitude' => ['required', 'string'],
+            'coordinates.longitude' => ['required', 'string'],
             
             'cover_image' => ['nullable'],
             'image_name' => ['nullable'],
-            'imagedata' => ['nullable', 'image', 'mimes:jpeg,jpg,png,svg,gif'],
+            'imagedata' => ['nullable', 'image'],
             'date_applied' => ['nullable', 'date'],
             'date_approved' => ['nullable', 'date'],
             'status' => ['nullable', 'string']

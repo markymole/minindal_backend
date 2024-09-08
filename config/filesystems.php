@@ -70,11 +70,8 @@ return [
     */
 
     'links' => [
-        public_path('records') => storage_path('app/records'),
-        public_path('pending_records') => storage_path('app/pending_records'),
-        public_path('archived_records') => storage_path('app/archived_records'),
-        public_path('reviews') => storage_path('app/reviews')
-
+        public_path('images') => storage_path('app/public/records'),
+        // public_path('reviews') => storage_path('app/reviews')
     ],
 
 ];

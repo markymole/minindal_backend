@@ -118,19 +118,36 @@ class RecordsController extends Controller
     {
         $data = $request->validated();
 
+        $data['operating_hours'] = json_encode([
+            'from' => $request->input('operating_hours.from'),
+            'to' => $request->input('operating_hours.to'),
+        ]);
+    
+        $data['open'] = json_encode([
+            'from' => $request->input('open.from'),
+            'to' => $request->input('open.to'),
+        ]);
+    
+        $data['coordinates'] = json_encode([
+            'latitude' => $request->input('coordinates.latitude'),
+            'longitude' => $request->input('coordinates.longitude'),
+        ]);
+
         if ($request->hasFile('imagedata')) {
             // Remove old image if it exists
             if ($record->cover_image) {
                 Storage::delete($record->cover_image);
             }
 
-            $data['cover_image'] = $request->file('imagedata')->store('records');
+            $path = $request->file('imagedata')->store('records', 'public');
+        
+            $data['cover_image'] = $path; 
             $data['image_name'] = $request->file('imagedata')->hashName();
         }
 
         $record->update($data);
 
-        return response()->json(['message' => 'Record Updated', 'data' => new RecordResource($record)]);
+        return response()->json(['message' => 'Record Updated', 'data' => new RecordResource($record)], 200);
     }
 
     /**
