@@ -3,6 +3,8 @@
 use App\Http\Controllers\Records\RecordsController;
 use App\Http\Controllers\Records\SpecialtiesController;
 use App\Http\Controllers\Records\ImageController;
+use App\Http\Controllers\Users\AdminController;
+use App\Http\Controllers\Users\UsersController;
 
 use App\Http\Controllers\Api\ArchiveController;
 use App\Http\Controllers\Api\PendingController;
@@ -62,11 +64,16 @@ Route::group(['prefix' => 'data'], function() {
 //     Route::apiResource('usergroup', UserController::class);
 // });
 
-Route::group(['middleware' => ['auth:sanctum']], function() {
-    Route::apiResource('usergroup', UserController::class);
-});
+// Route::group(['middleware' => ['auth:sanctum']], function() {
+//     Route::apiResource('usergroup', UserController::class);
+// });
 
 Route::apiResource('records', RecordsController::class);
+
+Route::apiResource('admins', AdminController::class)->middleware('auth:sanctum');
+
+Route::apiResource('users', UsersController::class)->middleware('auth:sanctum');
+
 
 Route::post('/record/image/{id}/update', [ImageController::class, 'updateImage']);
 
