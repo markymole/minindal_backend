@@ -18,16 +18,7 @@ class RecordsController extends Controller
     {
         $this->middleware('auth')->only(['update', 'destroy']);
     }
-    /**
-     * Display a listing of the records with pagination or all records.
-     *
-     * This method supports pagination by default, but if the 'all' query parameter is set to true,
-     * it will return all records without pagination. You can also apply additional filters using 
-     * query parameters such as 'city', 'type', and 'rating'.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
-    */
+
     public function index(Request $request)
     {
 
@@ -58,23 +49,15 @@ class RecordsController extends Controller
         }
     }
 
-    /**
-     * Display the specified record.
-     *
-     * @param \App\Models\Records $record
-     * @return \App\Http\Resources\RecordResource
-     */
     public function show(Records $record)
     {
         return new RecordResource($record);
     }
 
-    /**
-     * Store a newly created record in storage.
-     *
-     * @param \App\Http\Requests\StoreRecordRequest $request
-     * @return \Illuminate\Http\JsonResponse
-     */
+
+ 
+
+ 
     public function store(StoreRecordRequest $request)
     {
         $data = $request->validated();
@@ -107,13 +90,6 @@ class RecordsController extends Controller
         return response()->json(['message' => 'Record Created', 'data' => new RecordResource($record)], 200);
     }
 
-    /**
-     * Update the specified record in storage.
-     *
-     * @param \App\Http\Requests\StoreRecordRequest $request
-     * @param \App\Models\Records $record
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function update(StoreRecordRequest $request, Records $record)
     {
         $data = $request->validated();
@@ -150,12 +126,7 @@ class RecordsController extends Controller
         return response()->json(['message' => 'Record Updated', 'data' => new RecordResource($record)], 200);
     }
 
-    /**
-     * Remove the specified record from storage.
-     *
-     * @param \App\Models\Records $record
-     * @return \Illuminate\Http\JsonResponse
-     */
+
     public function destroy(Records $record)
     {
         // Delete the cover image if it exists

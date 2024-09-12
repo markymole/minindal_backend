@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Records\RecordsController;
+use App\Http\Controllers\Records\GeneralController;
 use App\Http\Controllers\Records\SpecialtiesController;
 use App\Http\Controllers\Records\ImageController;
 use App\Http\Controllers\Users\AdminController;
@@ -74,8 +75,10 @@ Route::apiResource('admins', AdminController::class)->middleware('auth:sanctum')
 
 Route::apiResource('users', UsersController::class)->middleware('auth:sanctum');
 
-
 Route::post('/record/image/{id}/update', [ImageController::class, 'updateImage']);
+
+Route::get('/record', [GeneralController::class, 'findByBusinessName']);
+
 
 // Specialties routes
 Route::get('/specialties/suggestions', [SpecialtiesController::class, 'getSpecialtiesSuggestions']);
