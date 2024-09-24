@@ -25,12 +25,11 @@ class ReviewRequest extends FormRequest
     public function rules()
     {
         return [
-            'business_name' => ['required', 'string'],
-            'comments' => ['nullable', 'string'],
-            'star_rating' => ['required', 'numeric'],
+            'business_id' => ['required', 'string'],
+            'description' => ['nullable', 'string'],
+            'rating' => ['required', 'numeric'],
             'author' => ['nullable', 'string'],
-            'review_image' => ['nullable'],
-            'image_name' => ['nullable'],
+            'images' => ['nullable', 'string'],
             'imagedata' => ['nullable', 'image', 'mimes:jpeg,jpg,png,svg,gif'],
         ];
     }

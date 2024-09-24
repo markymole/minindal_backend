@@ -32,10 +32,10 @@ class RecordResource extends JsonResource
             ],
             
             'rating' => $this->rating,
-            'category' => $this->category,
+            'categories' => $this->categories,
             'phone_numbers' => $this->phone_numbers,
             'cover_image' => $this->cover_image,
-            'image_name' => $this->image_name,
+            'images' => $this->images,
             'town' => $this->town,
             'address' => $this->address,
             

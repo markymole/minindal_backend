@@ -37,6 +37,10 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('active_user', 'auth:sanctum');
 
+Route::middleware('auth')->get('/auth/check-session', function () {
+    return response()->json(['message' => 'Session valid']);
+});
+
 //API's for record move and deletion
 
 Route::group(['prefix' => 'data'], function() {

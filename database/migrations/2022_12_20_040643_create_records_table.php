@@ -18,14 +18,14 @@ return new class extends Migration
             $table->string('business_name');
             $table->text('description');
             $table->string('specialties');
-            $table->string('category')->nullable(); // other general categories
+            $table->string('categories')->nullable(); // other general categories
             $table->json('open'); 
             $table->json('operating_hours'); // Refactor operating_from and operating_to
             $table->json('coordinates'); // Refactor latitude and longitude
             $table->decimal('rating', 3, 2)->nullable();
             $table->string('phone_numbers')->nullable();
             $table->string('cover_image')->nullable();
-            $table->string('image_name')->nullable();
+            $table->string('images')->nullable();
             $table->string('town');
             $table->string('address');
             $table->date('date_applied')->nullable();

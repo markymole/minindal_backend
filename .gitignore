@@ -17,3 +17,5 @@ yarn-error.log
 /.idea
 /.vscode
 /minindal-frontend
+/public/images
+/storage/app/public/records

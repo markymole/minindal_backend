@@ -27,22 +27,22 @@ class MigrateOldData extends Command
                 'business_name' => $oldRecord->business_name,
                 'description' => $oldRecord->description,
                 'specialties' => $oldRecord->specialties,
-                'operating_hours' => json_encode([
-                    'from' => $oldRecord->operating_from,
-                    'to' => $oldRecord->operating_to
-                ]),
+                'categories' => $oldRecord->category,
                 'open' => json_encode([
                     'from' => $oldRecord->open_from,
                     'to' => $oldRecord->open_to
                 ]),
+                'operating_hours' => json_encode([
+                    'from' => $oldRecord->operating_from,
+                    'to' => $oldRecord->operating_to
+                ]),
                 'rating' => $oldRecord->rating,
-                'category' => $oldRecord->category,
                 'phone_numbers' => implode(', ', [
                     $oldRecord->phone_number_one,
                     $oldRecord->phone_number_two
                 ]),
-                'cover_image' => $oldRecord->cover_image,
-                'image_name' => $oldRecord->image_name,
+                'cover_image' => $oldRecord->image_name,
+                'images' => $oldRecord->image_name,
                 'town' => $oldRecord->town,
                 'address' => $oldRecord->address,
                 'coordinates' => json_encode([
