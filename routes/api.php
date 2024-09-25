@@ -35,14 +35,18 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
-})->middleware('active_user', 'auth:sanctum');
+})->middleware('active', 'auth:sanctum');
 
+// auth routes
 Route::middleware('auth')->get('/auth/check-session', function () {
     return response()->json(['message' => 'Session valid']);
 });
 
-//API's for record move and deletion
+Route::post('/auth/login', [UsersController::class, 'login']);
 
+Route::post('/auth/admin/login', [AdminController::class, 'login']);
+
+// routess for record move and deletion
 Route::group(['prefix' => 'data'], function() {
     Route::post('/create-user', [AuthController::class, 'register']);
 });
@@ -61,18 +65,6 @@ Route::group(['prefix' => 'data'], function() {
 });
 
 
-//--------------------- api's -----------------------------
-// Route::group(['middleware' => ['auth:sanctum']], function (){
-//     Route::apiResource('records', RecordController::class);
-// });
-// Route::group(['prefix' => 'data'], function() {
-//     Route::apiResource('usergroup', UserController::class);
-// });
-
-// Route::group(['middleware' => ['auth:sanctum']], function() {
-//     Route::apiResource('usergroup', UserController::class);
-// });
-
 Route::apiResource('records', RecordsController::class);
 
 Route::apiResource('admins', AdminController::class)->middleware('auth:sanctum');
@@ -88,8 +80,4 @@ Route::get('/record', [GeneralController::class, 'findByBusinessName']);
 Route::get('/specialties/suggestions', [SpecialtiesController::class, 'getSpecialtiesSuggestions']);
 
 Route::get('/specialties/search', [SpecialtiesController::class, 'searchSpecialties']);
-
-Route::group(['prefix' => 'data'], function() {
-    Route::apiResource('towns', TownController::class);
-});
 

@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -103,4 +105,32 @@ class AdminController extends Controller
 
         return response()->json(['message' => 'User deleted successfully'], 200);
     }
+    
+    public function login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+    
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+    
+        $credentials = $request->only('email', 'password');
+    
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+    
+            if ($user->isAdmin()) {
+                return response()->json(['message' => 'Login successful', 'role' => 'Admin']);
+            } else {
+                Auth::logout();
+                return response()->json(['message' => 'Unauthorized access', 'role' => 'User'], 403);
+            }
+        }
+    
+        return response()->json(['message' => 'Invalid credentials'], 401);
+    }
+
 }
