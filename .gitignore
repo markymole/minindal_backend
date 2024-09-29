@@ -2,6 +2,8 @@
 /public/build
 /public/hot
 /public/storage
+/public/records
+/public/reviews
 /storage/*.key
 /vendor
 .env
@@ -19,3 +21,5 @@ yarn-error.log
 /minindal-frontend
 /public/images
 /storage/app/public/records
+/storage/app/public/reviews
+/storage/app/public/images

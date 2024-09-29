@@ -26,7 +26,7 @@ class ReviewRequest extends FormRequest
     {
         return [
             'business_id' => ['required', 'string'],
-            'description' => ['nullable', 'string'],
+            'comment' => ['nullable', 'string'],
             'rating' => ['required', 'numeric'],
             'author' => ['nullable', 'string'],
             'images' => ['nullable', 'string'],

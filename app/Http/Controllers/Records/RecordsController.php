@@ -54,10 +54,6 @@ class RecordsController extends Controller
         return new RecordResource($record);
     }
 
-
- 
-
- 
     public function store(StoreRecordRequest $request)
     {
         $data = $request->validated();
