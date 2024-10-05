@@ -114,7 +114,7 @@ class RecordsController extends Controller
             $path = $request->file('imagedata')->store('records', 'public');
         
             $data['cover_image'] = $path; 
-            $data['image_name'] = $request->file('imagedata')->hashName();
+            $data['images'] = $request->file('imagedata')->hashName();
         }
 
         $record->update($data);
