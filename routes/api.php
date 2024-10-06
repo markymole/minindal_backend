@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\Records\RecordsController;
 use App\Http\Controllers\Records\GeneralController;
 use App\Http\Controllers\Records\SpecialtiesController;
@@ -44,47 +45,26 @@ Route::middleware('auth')->get('/auth/check-session', function () {
 });
 
 Route::post('/auth/login', [UsersController::class, 'login']);
-
 Route::post('/auth/admin/login', [AdminController::class, 'login']);
-
 Route::apiResource('admins', AdminController::class)->middleware('auth:sanctum');
-
 Route::apiResource('users', UsersController::class)->middleware('auth:sanctum');
 // end of auth and user route
 
 
-
 // records & specialiteis routes
 Route::apiResource('records', RecordsController::class);
-
-// reviews route
 Route::apiResource('reviews', ReviewsController::class);
 
 // special user cases for records & specialties
 Route::post('/record/image/{id}/update', [ImageController::class, 'updateImage']);
-
 Route::get('/record', [GeneralController::class, 'findByBusinessName']);
-
 Route::get('/specialties/suggestions', [SpecialtiesController::class, 'getSpecialtiesSuggestions']);
-
 Route::get('/specialties/search', [SpecialtiesController::class, 'searchSpecialties']);
 // end of records & specialities routes
 
 
-
-
-
-// Route::group(['prefix' => 'data'], function() {
-//     Route::post('/create-user', [AuthController::class, 'register']);
-// });
-
-// Route::group(['prefix' => 'data'], function() {
-//     Route::apiResource('reviews', ReviewController::class);
-// });
-
-// Route::group(['prefix' => 'data'], function() {
-//     Route::apiResource('comments', CommentController::class);
-// });
+// message
+Route::post('/message', [MessageController::class, 'send']);
 
 //API for user data update , only for name and email. Password are requested thrue email
 Route::group(['prefix' => 'data'], function() {
