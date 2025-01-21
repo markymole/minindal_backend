@@ -41,8 +41,8 @@ class RecordResource extends JsonResource
             
             // Updated to reflect the coordinates object
             'coordinates' => [
-                'latitude' => json_decode($this->coordinates, true)['latitude'] ?? null,
-                'longitude' => json_decode($this->coordinates, true)['longitude'] ?? null,
+                'lat' => json_decode($this->coordinates, true)['lat'] ?? null,
+                'lng' => json_decode($this->coordinates, true)['lng'] ?? null,
             ],
             
             'date_applied' => $this->date_applied,

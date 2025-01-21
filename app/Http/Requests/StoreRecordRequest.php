@@ -47,8 +47,8 @@ class StoreRecordRequest extends FormRequest
             
             // Updated for coordinates
             // 'coordinates' => ['required', 'array'],
-            'coordinates.latitude' => ['required', 'string'],
-            'coordinates.longitude' => ['required', 'string'],
+            'coordinates.lat' => ['required', 'string'],
+            'coordinates.lng' => ['required', 'string'],
             
             'cover_image' => ['nullable'],
             'image_name' => ['nullable'],

@@ -46,8 +46,8 @@ class MigrateOldData extends Command
                 'town' => $oldRecord->town,
                 'address' => $oldRecord->address,
                 'coordinates' => json_encode([
-                    'latitude' => $oldRecord->latitude,
-                    'longitude' => $oldRecord->longitude
+                    'lat' => $oldRecord->latitude,
+                    'lng' => $oldRecord->longitude
                 ]),
                 'date_applied' => $oldRecord->date_applied,
                 'date_approved' => $oldRecord->date_approved,

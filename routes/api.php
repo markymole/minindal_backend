@@ -4,6 +4,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\Records\RecordsController;
 use App\Http\Controllers\Records\GeneralController;
 use App\Http\Controllers\Records\SpecialtiesController;
+use App\Http\Controllers\Records\SuggestionsController;
 use App\Http\Controllers\Records\ImageController;
 use App\Http\Controllers\Users\AdminController;
 use App\Http\Controllers\Users\UsersController;
@@ -55,13 +56,16 @@ Route::apiResource('users', UsersController::class)->middleware('auth:sanctum');
 Route::apiResource('records', RecordsController::class);
 Route::apiResource('reviews', ReviewsController::class);
 
+
+
 // special user cases for records & specialties
 Route::post('/record/image/{id}/update', [ImageController::class, 'updateImage']);
 Route::get('/record', [GeneralController::class, 'findByBusinessName']);
 Route::get('/specialties/suggestions', [SpecialtiesController::class, 'getSpecialtiesSuggestions']);
 Route::get('/specialties/search', [SpecialtiesController::class, 'searchSpecialties']);
+Route::get('/categories/top', [SpecialtiesController::class, 'getTopSpecialties']);
+Route::get('/suggestions', [SuggestionsController::class, 'getRandomSuggestions']);
 // end of records & specialities routes
-
 
 // message
 Route::post('/message', [MessageController::class, 'send']);

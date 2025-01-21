@@ -69,8 +69,8 @@ class RecordsController extends Controller
         ]);
     
         $data['coordinates'] = json_encode([
-            'latitude' => $request->input('coordinates.latitude'),
-            'longitude' => $request->input('coordinates.longitude'),
+            'lat' => $request->input('coordinates.lat'),
+            'lng' => $request->input('coordinates.lng'),
         ]);
 
         // Handle file upload
@@ -101,8 +101,8 @@ class RecordsController extends Controller
         ]);
     
         $data['coordinates'] = json_encode([
-            'latitude' => $request->input('coordinates.latitude'),
-            'longitude' => $request->input('coordinates.longitude'),
+            'lat' => $request->input('coordinates.lat'),
+            'lng' => $request->input('coordinates.lng'),
         ]);
 
         if ($request->hasFile('imagedata')) {

@@ -73,4 +73,31 @@ class SpecialtiesController extends Controller
 
         return response()->json($results->values()->toArray());
     }
+
+
+    /**
+     * Get the top 5 or 10 most popular specialties across all towns.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getTopSpecialties()
+    {
+        $query = Records::query();
+
+        // Fetch and process specialties with counts
+        $specialtyCounts = $query->pluck('specialties')
+            ->map(function ($specialty) {
+                return array_map('trim', explode(',', strtolower($specialty))); // Convert to lowercase
+            })
+            ->flatten()
+            ->filter(fn($item) => !empty($item))
+            ->countBy(); // Count occurrences of each specialty
+
+        // Get top 10 specialties by count
+        $topSpecialties = $specialtyCounts
+            ->sortDesc() // Sort by count in descending order
+            ->take(25);  // Take top 10
+
+        return response()->json($topSpecialties);
+    }
 }
